@@ -1,0 +1,55 @@
+/* static\css\nav.css */
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: rgb(138, 0, 69);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+*{
+    font-family: 'Jost', sans-serif;
+}
+.navbar-left a, 
+.navbar-right button {
+    text-decoration: none;
+    color: rgb(138, 0, 69);
+    margin-right: 15px;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.navbar-left a:hover, 
+.navbar-right button:hover {
+    color: rgb(138, 0, 69);
+}
+
+.navbar-center span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar-right button {
+    background-color:  rgb(138, 0, 69);
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    margin-right: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar-right button:hover {
+    background-color: white;
+    border: 1px solid rgb(138, 0, 69);
+    color: rgb(138, 0, 69);
+}

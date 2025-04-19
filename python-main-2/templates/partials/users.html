@@ -1,0 +1,163 @@
+<!-- templates\partials\users.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <title>User Management</title>
+    <style>
+        /* General Table Styling */
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        overflow: hidden;
+        border-radius: 10px; /* Rounded corners */
+    }
+
+    thead th {
+        background-color: rgb(138, 0, 69); /* Header background color */
+        color: white; /* Header text color */
+        text-transform: uppercase; /* Uppercase for header text */
+        font-size: 14px; /* Slightly smaller font */
+        padding: 15px 10px;
+        border: none;
+        text-align: center; /* Center align header text */
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #ddd; /* Row separator */
+        transition: background-color 0.3s ease; /* Highlight on hover */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9; /* Alternate row color */
+    }
+
+    tbody tr:hover {
+        background-color: rgb(250, 239, 245); /* Row hover effect */
+    }
+
+    td {
+        font-size: 16px;
+        padding: 15px 10px;
+        text-align: center; /* Center align table data */
+        border: none; /* Clean table look */
+        color: rgb(53, 7, 30); /* Text color */
+    }
+
+    td:last-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* Space between action buttons */
+    }
+
+    /* Buttons Styling */
+    button {
+        background-color: rgb(0, 107, 130); /* Primary action button */
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+        background-color: rgb(138, 0, 69); /* Hover effect */
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    button[style*="color: red;"] {
+        background-color: rgb(189, 7, 7); /* Red button for delete */
+        color: white !important;
+    }
+
+    button[style*="color: red;"]:hover {
+        background-color: rgb(220, 20, 60); /* Darker red on hover */
+    }
+
+    /* Admin Status Buttons */
+    form[method="POST"] button {
+        display: inline-block;
+        margin: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="admin-panel">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Admin <br> Dashboard</h1>
+            </div>
+            <ul class="menu">
+                <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+                <li><a href="{{ url_for('users') }}">View All Users</a></li>
+                <li><a href="{{ url_for('appointments') }}">View All Appointments</a></li>
+                <li><a href="{{ url_for('addappointmentslots') }}">Add Appointment Slots</a></li>
+                <li><a href="{{ url_for('adddoctor') }}">Add Doctor</a></li>
+                <li><a href="{{ url_for('courses') }}">View All Courses</a></li>
+                <li><a href="{{ url_for('addcourse') }}">Add Courses</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="content" class="content">
+            <h1>All Users</h1>
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Admin Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- User data will be populated here dynamically -->
+                </tbody>
+            </table>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+
+    <script>
+        // Fetch user data and populate the table
+        fetch('/api/users_data')
+            .then(response => response.json())
+            .then(users => {
+                const tableBody = document.querySelector('#userTable tbody');
+                tableBody.innerHTML = users.map(user => `
+                    <tr>
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.isadmin ? 'Yes' : 'No'}</td>
+                        <td>
+                            <form method="POST" action="/api/toggle_admin" style="display:inline;">
+                                <input type="hidden" name="user_id" value="${user.id}">
+                                <button type="submit">${user.isadmin ? 'Unappoint as Admin' : 'Appoint as Admin'}</button>
+                            </form>
+                            <form method="POST" action="/api/delete_user" style="display:inline;">
+                                <input type="hidden" name="user_id" value="${user.id}">
+                                <button type="submit" style="color: red;">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                `).join('');
+            })
+            .catch(error => console.error('Error loading users:', error));
+    </script>
+</body>
+
+</html>

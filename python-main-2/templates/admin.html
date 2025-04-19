@@ -1,0 +1,38 @@
+<!-- templates\admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <title>Admin Panel</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <div class="admin-panel">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Admin <br> Dashboard</h1>
+            </div>
+            <ul class="menu">
+                <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+                <li><a href="{{ url_for('users') }}">View All Users</a></li>
+                <li><a href="{{ url_for('appointments') }}">View All Appointments</a></li>
+                <li><a href="{{ url_for('addappointmentslots') }}">Add Appointment Slots</a></li>
+                <li><a href="{{ url_for('adddoctor') }}">Add Doctor</a></li>
+                <li><a href="{{ url_for('courses') }}">View All Courses</a></li>
+                <li><a href="{{ url_for('addcourse') }}">Add Courses</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="content" class="content">
+            <h1>Welcome, {{username}}!</h1>
+            <p>Select an option from the sidebar to manage the website.</p>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+</body>
+</html>

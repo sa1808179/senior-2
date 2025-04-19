@@ -1,0 +1,93 @@
+/* static\css\admin.css */
+/* Admin Panel Container */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.admin-panel {
+    display: flex;
+    height: 100vh;
+    font-family: 'Jost', sans-serif;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: rgb(138, 0, 69);
+    color: wheat;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 3px solid wheat;
+}
+
+.sidebar-header h1{
+    color: wheat;
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.sidebar-header h2 {
+    font-size: 24px;
+    color: wheat;
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-bottom: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: wheat;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: block;
+    border-bottom: 1px solid wheat;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    display: flex;
+    background-color: rgb(0, 107, 130);
+    color: wheat;
+    flex-direction: column;
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.content h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.content p {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: bold;
+}

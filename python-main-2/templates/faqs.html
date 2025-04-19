@@ -1,0 +1,78 @@
+<!-- templates\faqs.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/faqs.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('book_appointment')}}">Book Appointment</a>
+      <a href="{{ url_for('faqs') }}">FAQs</a>
+      {% if isadmin %}
+        <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+      {% endif %}
+    </div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-left"></div>
+    <div class="navbar-center">
+      <span id="welcome-message">Welcome, {{ username }}!</span>
+    </div>
+    <div class="navbar-right">
+      <button onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <div class="faq">
+    <h2 class="faq__title">Frequently Asked Questions</h2>
+    <details>
+      <summary>How many times should a student meet with his/her academic advisor during a semester?</summary>
+      <p>
+        It is recommended that students meet with their academic advisor multiple times throughout the semester. Ideally, students should schedule a meeting at the start of the semester, before early registration, and consult their advisor before dropping any courses.
+      </p>
+    </details>
+    <details>
+      <summary>How and where can a student meet his/her academic advisor?</summary>
+      <p>
+        Students can schedule an appointment (either in person or online) through the Appointment Manager system. Alternatively, they can visit during the advisor's walk-in hours without a prior appointment.
+      </p>
+    </details>
+    <details>
+      <summary>What is academic probation?</summary>
+      <p>
+        Academic probation refers to the academic status of any undergraduate student who has completed at least 19 credit hours (calculated in the GPA) and has earned a cumulative GPA below 2.0.
+      </p>
+    </details>
+  </div>
+
+  <script>
+    // Toggle open/close animations for FAQ sections
+    document.querySelectorAll("details").forEach((detail) => {
+      detail.addEventListener("toggle", () => {
+        if (detail.open) {
+          detail.classList.add("open");
+        } else {
+          detail.classList.remove("open");
+        }
+      });
+    });
+    </script>
+    <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+</body>
+
+</html>

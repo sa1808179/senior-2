@@ -1,0 +1,170 @@
+<!-- templates\partials\addappointmentslot.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Appointment Slots</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(0, 107, 130);
+            /* Matching background */
+            font-family: 'Jost', sans-serif;
+            color: white;
+            /* White text for contrast */
+        }
+
+        /* Container for Forms and Content */
+        .container {
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 7px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+            background-color: #fff;
+            /* White background for contrast */
+            color: rgb(0, 107, 130);
+            /* Match the body background for text */
+        }
+
+        /* Titles */
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: rgb(138, 0, 69);
+            /* Highlight title */
+            margin-bottom: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            color: rgb(138, 0, 69);
+            /* Match the title color */
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgb(138, 0, 69);
+            /* Border matches title color */
+            outline: none;
+            background-color: rgb(0, 107, 130);
+            /* Match the body background */
+            color: white;
+            /* White text */
+            transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border: 1px solid white;
+            /* Highlight on focus */
+        }
+
+        button {
+            background-color: rgb(138, 0, 69);
+            /* Accent color */
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
+            /* White text */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        button:hover {
+            color: rgba(255, 255, 255, 0.716);
+            /* Accent text on hover */
+            /* Highlight on hover */
+        }
+
+        /* Messages */
+        .success-message,
+        .error-message {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .message {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-panel">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Admin <br> Dashboard</h1>
+            </div>
+            <ul class="menu">
+                <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+                <li><a href="{{ url_for('users') }}">View All Users</a></li>
+                <li><a href="{{ url_for('appointments') }}">View All Appointments</a></li>
+                <li><a href="{{ url_for('addappointmentslots') }}">Add Appointment Slots</a></li>
+                <li><a href="{{ url_for('adddoctor') }}">Add Doctor</a></li>
+                <li><a href="{{ url_for('courses') }}">View All Courses</a></li>
+                <li><a href="{{ url_for('addcourse') }}">Add Courses</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="content" class="content">
+            <div class="container">
+                <h1>Add Appointment Slots</h1>
+
+                {% if error %}
+                <div class="message" style="color: rgb(130, 5, 5);">{{ error }}</div>
+                {% endif %}
+                {% if success %}
+                <div class="message" style="color: rgb(10, 161, 75);">{{ success }}</div>
+                {% endif %}
+
+                <form method="POST" action="/api/add_slots">
+                    <label for="advisor_id">Advisor ID:</label>
+                    <select id="advisor_id" name="advisor_id" required>
+                        {% for advisor in advisors %}
+                        <option value="{{ advisor[0] }}">{{ advisor[1] }}</option>
+                        {% endfor %}
+                    </select><br><br>
+
+                    <label for="available_date">Date:</label>
+                    <input type="date" id="available_date" name="available_date" required><br><br>
+
+                    <label for="time_slot">Time Slot:</label>
+                    <input type="text" id="time_slot" name="time_slot" required><br><br>
+
+                    <button type="submit">Add Slot</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+
+</body>
+
+</html>
