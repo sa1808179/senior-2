@@ -3,3 +3,4 @@ Flask
 langchain-groq
 PyJWT
 Jinja2
+gunicorn
